@@ -25,8 +25,8 @@ import { DeleteCustomerArgs } from "./DeleteCustomerArgs";
 import { CustomerFindManyArgs } from "./CustomerFindManyArgs";
 import { CustomerFindUniqueArgs } from "./CustomerFindUniqueArgs";
 import { Customer } from "./Customer";
-import { AssetFindManyArgs } from "../../asset/base/AssetFindManyArgs";
-import { Asset } from "../../asset/base/Asset";
+import { EventFindManyArgs } from "../../event/base/EventFindManyArgs";
+import { Event } from "../../event/base/Event";
 import { CustomerService } from "../customer.service";
 
 @graphql.Resolver(() => Customer)
@@ -206,24 +206,24 @@ export class CustomerResolverBase {
     }
   }
 
-  @graphql.ResolveField(() => [Asset])
+  @graphql.ResolveField(() => [Event])
   @nestAccessControl.UseRoles({
     resource: "Customer",
     action: "read",
     possession: "any",
   })
-  async assets(
+  async events(
     @graphql.Parent() parent: Customer,
-    @graphql.Args() args: AssetFindManyArgs,
+    @graphql.Args() args: EventFindManyArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Asset[]> {
+  ): Promise<Event[]> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "read",
       possession: "any",
-      resource: "Asset",
+      resource: "Event",
     });
-    const results = await this.service.findAssets(parent.id, args);
+    const results = await this.service.findEvents(parent.id, args);
 
     if (!results) {
       return [];

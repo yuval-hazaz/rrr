@@ -61,31 +61,31 @@
   },
   {
     "role": "user",
-    "resource": "Asset",
+    "resource": "Event",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Asset",
+    "resource": "Event",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Asset",
+    "resource": "Event",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Asset",
+    "resource": "Event",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Asset",
+    "resource": "Event",
     "action": "read:any",
     "attributes": "*"
   }

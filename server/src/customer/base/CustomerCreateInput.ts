@@ -11,34 +11,11 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AssetCreateNestedManyWithoutCustomersInput } from "./AssetCreateNestedManyWithoutCustomersInput";
-import { ValidateNested, IsOptional, IsString } from "class-validator";
+import { IsString, IsOptional, ValidateNested } from "class-validator";
+import { EventCreateNestedManyWithoutCustomersInput } from "./EventCreateNestedManyWithoutCustomersInput";
 import { Type } from "class-transformer";
 @InputType()
 class CustomerCreateInput {
-  @ApiProperty({
-    required: false,
-    type: () => AssetCreateNestedManyWithoutCustomersInput,
-  })
-  @ValidateNested()
-  @Type(() => AssetCreateNestedManyWithoutCustomersInput)
-  @IsOptional()
-  @Field(() => AssetCreateNestedManyWithoutCustomersInput, {
-    nullable: true,
-  })
-  assets?: AssetCreateNestedManyWithoutCustomersInput;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  comments?: string | null;
-
   @ApiProperty({
     required: false,
     type: String,
@@ -49,6 +26,18 @@ class CustomerCreateInput {
     nullable: true,
   })
   email?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => EventCreateNestedManyWithoutCustomersInput,
+  })
+  @ValidateNested()
+  @Type(() => EventCreateNestedManyWithoutCustomersInput)
+  @IsOptional()
+  @Field(() => EventCreateNestedManyWithoutCustomersInput, {
+    nullable: true,
+  })
+  events?: EventCreateNestedManyWithoutCustomersInput;
 
   @ApiProperty({
     required: false,
@@ -71,16 +60,5 @@ class CustomerCreateInput {
     nullable: true,
   })
   lastName?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  phone?: string | null;
 }
 export { CustomerCreateInput };

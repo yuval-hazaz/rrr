@@ -1,13 +1,11 @@
-import { AssetListRelationFilter } from "../asset/AssetListRelationFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { EventListRelationFilter } from "../event/EventListRelationFilter";
 import { StringFilter } from "../../util/StringFilter";
 
 export type CustomerWhereInput = {
-  assets?: AssetListRelationFilter;
-  comments?: StringNullableFilter;
   email?: StringNullableFilter;
+  events?: EventListRelationFilter;
   firstName?: StringNullableFilter;
   id?: StringFilter;
   lastName?: StringNullableFilter;
-  phone?: StringNullableFilter;
 };
