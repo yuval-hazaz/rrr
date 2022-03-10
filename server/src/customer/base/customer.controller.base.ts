@@ -27,9 +27,9 @@ import { CustomerWhereUniqueInput } from "./CustomerWhereUniqueInput";
 import { CustomerFindManyArgs } from "./CustomerFindManyArgs";
 import { CustomerUpdateInput } from "./CustomerUpdateInput";
 import { Customer } from "./Customer";
-import { AssetFindManyArgs } from "../../asset/base/AssetFindManyArgs";
-import { Asset } from "../../asset/base/Asset";
-import { AssetWhereUniqueInput } from "../../asset/base/AssetWhereUniqueInput";
+import { EventFindManyArgs } from "../../event/base/EventFindManyArgs";
+import { Event } from "../../event/base/Event";
+import { EventWhereUniqueInput } from "../../event/base/EventWhereUniqueInput";
 @swagger.ApiBearerAuth()
 export class CustomerControllerBase {
   constructor(
@@ -75,13 +75,11 @@ export class CustomerControllerBase {
     return await this.service.create({
       data: data,
       select: {
-        comments: true,
         createdAt: true,
         email: true,
         firstName: true,
         id: true,
         lastName: true,
-        phone: true,
         updatedAt: true,
       },
     });
@@ -116,13 +114,11 @@ export class CustomerControllerBase {
     const results = await this.service.findMany({
       ...args,
       select: {
-        comments: true,
         createdAt: true,
         email: true,
         firstName: true,
         id: true,
         lastName: true,
-        phone: true,
         updatedAt: true,
       },
     });
@@ -156,13 +152,11 @@ export class CustomerControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
-        comments: true,
         createdAt: true,
         email: true,
         firstName: true,
         id: true,
         lastName: true,
-        phone: true,
         updatedAt: true,
       },
     });
@@ -217,13 +211,11 @@ export class CustomerControllerBase {
         where: params,
         data: data,
         select: {
-          comments: true,
           createdAt: true,
           email: true,
           firstName: true,
           id: true,
           lastName: true,
-          phone: true,
           updatedAt: true,
         },
       });
@@ -258,13 +250,11 @@ export class CustomerControllerBase {
       return await this.service.delete({
         where: params,
         select: {
-          comments: true,
           createdAt: true,
           email: true,
           firstName: true,
           id: true,
           lastName: true,
-          phone: true,
           updatedAt: true,
         },
       });
@@ -283,30 +273,29 @@ export class CustomerControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Get("/:id/assets")
+  @common.Get("/:id/events")
   @nestAccessControl.UseRoles({
     resource: "Customer",
     action: "read",
     possession: "any",
   })
-  @ApiNestedQuery(AssetFindManyArgs)
-  async findManyAssets(
+  @ApiNestedQuery(EventFindManyArgs)
+  async findManyEvents(
     @common.Req() request: Request,
     @common.Param() params: CustomerWhereUniqueInput,
     @nestAccessControl.UserRoles() userRoles: string[]
-  ): Promise<Asset[]> {
-    const query = plainToClass(AssetFindManyArgs, request.query);
+  ): Promise<Event[]> {
+    const query = plainToClass(EventFindManyArgs, request.query);
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "read",
       possession: "any",
-      resource: "Asset",
+      resource: "Event",
     });
-    const results = await this.service.findAssets(params.id, {
+    const results = await this.service.findEvents(params.id, {
       ...query,
       select: {
         address: true,
-        assetType: true,
         createdAt: true,
 
         customer: {
@@ -315,8 +304,8 @@ export class CustomerControllerBase {
           },
         },
 
+        date: true,
         id: true,
-        name: true,
         updatedAt: true,
       },
     });
@@ -333,19 +322,19 @@ export class CustomerControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Post("/:id/assets")
+  @common.Post("/:id/events")
   @nestAccessControl.UseRoles({
     resource: "Customer",
     action: "update",
     possession: "any",
   })
-  async createAssets(
+  async createEvents(
     @common.Param() params: CustomerWhereUniqueInput,
     @common.Body() body: CustomerWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      assets: {
+      events: {
         connect: body,
       },
     };
@@ -378,19 +367,19 @@ export class CustomerControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Patch("/:id/assets")
+  @common.Patch("/:id/events")
   @nestAccessControl.UseRoles({
     resource: "Customer",
     action: "update",
     possession: "any",
   })
-  async updateAssets(
+  async updateEvents(
     @common.Param() params: CustomerWhereUniqueInput,
-    @common.Body() body: AssetWhereUniqueInput[],
+    @common.Body() body: EventWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      assets: {
+      events: {
         set: body,
       },
     };
@@ -423,19 +412,19 @@ export class CustomerControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Delete("/:id/assets")
+  @common.Delete("/:id/events")
   @nestAccessControl.UseRoles({
     resource: "Customer",
     action: "update",
     possession: "any",
   })
-  async deleteAssets(
+  async deleteEvents(
     @common.Param() params: CustomerWhereUniqueInput,
     @common.Body() body: CustomerWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      assets: {
+      events: {
         disconnect: body,
       },
     };

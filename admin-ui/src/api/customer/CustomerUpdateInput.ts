@@ -1,10 +1,8 @@
-import { AssetUpdateManyWithoutCustomersInput } from "./AssetUpdateManyWithoutCustomersInput";
+import { EventUpdateManyWithoutCustomersInput } from "./EventUpdateManyWithoutCustomersInput";
 
 export type CustomerUpdateInput = {
-  assets?: AssetUpdateManyWithoutCustomersInput;
-  comments?: string | null;
   email?: string | null;
+  events?: EventUpdateManyWithoutCustomersInput;
   firstName?: string | null;
   lastName?: string | null;
-  phone?: string | null;
 };

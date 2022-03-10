@@ -11,45 +11,37 @@ import { CustomerService } from "../customer.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
-  comments: "exampleComments",
   createdAt: new Date(),
   email: "exampleEmail",
   firstName: "exampleFirstName",
   id: "exampleId",
   lastName: "exampleLastName",
-  phone: "examplePhone",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
-  comments: "exampleComments",
   createdAt: new Date(),
   email: "exampleEmail",
   firstName: "exampleFirstName",
   id: "exampleId",
   lastName: "exampleLastName",
-  phone: "examplePhone",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
-    comments: "exampleComments",
     createdAt: new Date(),
     email: "exampleEmail",
     firstName: "exampleFirstName",
     id: "exampleId",
     lastName: "exampleLastName",
-    phone: "examplePhone",
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
-  comments: "exampleComments",
   createdAt: new Date(),
   email: "exampleEmail",
   firstName: "exampleFirstName",
   id: "exampleId",
   lastName: "exampleLastName",
-  phone: "examplePhone",
   updatedAt: new Date(),
 };
 
